@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This software is in the public domain under CC0 1.0 Universal plus a
+Grant of Patent License.
+
+To the extent possible under law, the author(s) have dedicated all
+copyright and related and neighboring rights to this software to the
+public domain worldwide. This software is distributed without any
+warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication
+along with this software (see the LICENSE.md file). If not, see
+<http://creativecommons.org/publicdomain/zero/1.0/>.
+-->
+<entity-facade-xml type="demo">
+
+    <!--
+    To use a carrier you must configure that carrier on Shippo through their webapp. The URL and other details depend on the
+    reseller you are working through who uses RSIS.
+    -->
+
+    <mantle.shipment.carrier.ShippingGatewayConfig shippingGatewayConfigId="RSIS_DEMO"
+            shippingGatewayTypeEnumId="ShGtwyRsisCore" description="RSIS Core API Demo"
+            getOrderRateServiceName="mantle.rsis.RsisServices.get#OrderShippingRate"
+            getShippingRatesBulkName="mantle.rsis.RsisServices.get#ShippingRatesBulk"
+            getAutoPackageInfoName=""
+            getRateServiceName="mantle.rsis.RsisServices.get#ShippingRate"
+            requestLabelsServiceName="mantle.rsis.RsisServices.request#ShippingLabels"
+            refundLabelsServiceName="mantle.rsis.RsisServices.refund#ShippingLabels"
+            trackLabelsServiceName="mantle.rsis.RsisServices.track#ShippingLabels"
+            validateAddressServiceName=""><!-- NOTE: validate address does not seem to be supported as independent call -->
+        <!-- set your Carrier Account IDs for carriers with records like these -->
+        <carriers carrierPartyId="UPS" gatewayAccountId=""/>
+        <carriers carrierPartyId="FedEx" gatewayAccountId=""/>
+        <carriers carrierPartyId="DHLX" gatewayAccountId=""/>
+        <carriers carrierPartyId="USPS" gatewayAccountId=""/>
+        <!-- set your RSIS Core API Key (token) with a record like this -->
+        <options optionEnumId="SgoApiToken" optionValue=""/>
+        <options optionEnumId="SgoLabelType" optionValue="PDF"/>
+    </mantle.shipment.carrier.ShippingGatewayConfig>
+    <!-- used in mantle.shipment.CarrierServices ShipmentLabels services -->
+    <moqui.security.UserGroupPreference userGroupId="ALL_USERS" preferenceKey="DefaultShipmentGatewayConfigId"
+            preferenceValue="RSIS_DEMO"/>
+
+    <!-- example per org/vendor settings, used as defaults if not store; note that for screens like EditParty with no store or
+        vendor the Owner Party must be set to use these settings -->
+    <mantle.party.PartySetting partyId="ORG_ZIZI_RETAIL" partySettingTypeId="ValidateAddressGatewayConfigId" settingValue="RSIS_DEMO"/>
+    <mantle.party.PartySetting partyId="ORG_ZIZI_RETAIL" partySettingTypeId="DefaultShipmentGatewayConfigId" settingValue="RSIS_DEMO"/>
+
+    <!-- example additional settings for POPC_DEFAULT store to use SHIPPO_DEMO gateway for USPS, UPS, FedEx:
+    <mantle.product.store.ProductStore productStoreId="POPC_DEFAULT">
+        <shipOptions carrierPartyId="_NA_" shipmentMethodEnumId="ShMthGround" sequenceNum="1"/>
+        <shipOptions carrierPartyId="USPS" shipmentMethodEnumId="ShMthGround" sequenceNum="5"/>
+        <shipOptions carrierPartyId="USPS" shipmentMethodEnumId="ShMthThirdDay" sequenceNum="6"/>
+        <shipOptions carrierPartyId="USPS" shipmentMethodEnumId="ShMthNextDay" sequenceNum="7"/>
+        <shipOptions carrierPartyId="UPS" shipmentMethodEnumId="ShMthGround" sequenceNum="11"/>
+        <shipOptions carrierPartyId="UPS" shipmentMethodEnumId="ShMthThirdDay" sequenceNum="12"/>
+        <shipOptions carrierPartyId="UPS" shipmentMethodEnumId="ShMthSecondDay" sequenceNum="13"/>
+        <shipOptions carrierPartyId="UPS" shipmentMethodEnumId="ShMthNextDay" sequenceNum="14"/>
+        <shipOptions carrierPartyId="FedEx" shipmentMethodEnumId="ShMthGround" sequenceNum="21"/>
+        <shipOptions carrierPartyId="FedEx" shipmentMethodEnumId="ShMthThirdDay" sequenceNum="22"/>
+        <shipOptions carrierPartyId="FedEx" shipmentMethodEnumId="ShMthSecondDay" sequenceNum="23"/>
+        <shipOptions carrierPartyId="FedEx" shipmentMethodEnumId="ShMthNextDay" sequenceNum="24"/>
+        <shippingGateways carrierPartyId="_NA_" shippingGatewayConfigId="NA_LOCAL"/>
+        <shippingGateways carrierPartyId="USPS" shippingGatewayConfigId="RSIS_DEMO"/>
+        <shippingGateways carrierPartyId="UPS" shippingGatewayConfigId="RSIS_DEMO"/>
+        <shippingGateways carrierPartyId="FedEx" shippingGatewayConfigId="RSIS_DEMO"/>
+    </mantle.product.store.ProductStore>
+    -->
+</entity-facade-xml>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This software is in the public domain under CC0 1.0 Universal plus a 
+Grant of Patent License.
+
+To the extent possible under law, the author(s) have dedicated all
+copyright and related and neighboring rights to this software to the
+public domain worldwide. This software is distributed without any
+warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication
+along with this software (see the LICENSE.md file). If not, see
+<http://creativecommons.org/publicdomain/zero/1.0/>.
+-->
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-2.1.xsd">
+
+    <!-- ========== Rate (Estimate) Services ========== -->
+
+    <service verb="get" noun="OrderShippingRate">
+        <implements service="mantle.shipment.CarrierServices.get#OrderShippingRate"/>
+        <actions>
+            <!-- TODO -->
+        </actions>
+    </service>
+    <service verb="get" noun="ShippingRatesBulk">
+        <implements service="mantle.shipment.CarrierServices.get#ShippingRatesBulk"/>
+        <actions>
+            <!-- TODO -->
+        </actions>
+    </service>
+    <service verb="get" noun="ShippingRate">
+        <implements service="mantle.shipment.CarrierServices.get#ShippingRate"/>
+        <actions>
+            <!-- TODO FUTURE: get rate save ID, change request#ShippingLabels to do transaction based on rate if set -->
+        </actions>
+    </service>
+
+    <!-- ============================================= -->
+    <!-- ========== Shipping Label Services ========== -->
+    <!-- ============================================= -->
+
+    <service verb="request" noun="ShippingLabels">
+        <implements service="mantle.shipment.CarrierServices.request#ShippingLabels"/>
+        <actions>
+            <!-- TODO -->
+        </actions>
+    </service>
+
+    <service verb="refund" noun="ShippingLabels">
+        <implements service="mantle.shipment.CarrierServices.refund#ShippingLabels"/>
+        <actions>
+            <!-- TODO -->
+        </actions>
+    </service>
+    <service verb="track" noun="ShippingLabels">
+        <implements service="mantle.shipment.CarrierServices.track#ShippingLabels"/>
+        <actions>
+            <!-- TODO -->
+        </actions>
+    </service>
+
+</services>
